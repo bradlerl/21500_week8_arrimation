@@ -49,8 +49,9 @@ const moveBoyAndGirl = () => {
 
             // Girl Walking
             girlData.x = boyData.x - 80;
-            girlElem.style.left = girlData.x + "px";
-            girlElem.src = girlData.walkImgs[girlData.poseNumber % girlData.walkImgs.length];
+            girlData.elem.style.left = girlData.x + "px";
+            girlData.elem.src = girlData.walkImgs[girlData.poseNumber % girlData.walkImgs.length];
+            girlData.poseNumber = (girlData.poseNumber + 1) % girlData.walkImgs.length;
         }
         else {
             clearInterval(boyData.timerId);
@@ -120,11 +121,11 @@ const runAway = () => {
         girlData.x -= 10;
         girlElem.style.left = girlData.x + "px";
         girlElem.src = girlData.runImgs[girlData.poseNumber];
-        girlData.poseNumber = (girlData.poseNumber + 1) % girlData.runningImgs.length;
+        girlData.poseNumber = (girlData.poseNumber + 1) % girlData.runImgs.length;
 
         if (girlData.x < -150) {
             clearInterval(girlData.timerId);
-            girlElem.src = girlData.stoppedImgs;
+            girlElem.src = girlData.stoppedImg;
         }
     }, 100);
 }
