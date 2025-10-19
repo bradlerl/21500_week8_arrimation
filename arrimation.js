@@ -6,8 +6,8 @@ const jackElem = document.querySelector("#jack");
 const treeElem = document.querySelector("#tree");
 
 const sceneWidth = scene.clientWidth;
-const jackX = sceneWidth / 2 - 30;
-const treeX = sceneWidth / 2 + 20;
+const jackX = sceneWidth / 2 - 130;
+const treeX = sceneWidth / 2 - 200;
 jackElem.style.left = jackX + "px";
 treeElem.style.left = treeX + "px";
 
@@ -75,7 +75,7 @@ const startJackAnimation = () => {
             startBoyCheer();
             setTimeout(startGirlReaction, 300);
         }
-    }, 600);
+    }, 100);
 };
 
 const startBoyCheer = () => {
@@ -96,7 +96,7 @@ const startBoyCheer = () => {
                 boyData.elem.src = boyData.stoppedImg;
             }
         }
-    }, 200); 
+    }, 100); 
 };
 
 // Girl Turns Around and Runs
@@ -112,7 +112,7 @@ const startGirlReaction = () => {
             clearInterval(turnInterval);
             runAway();
         }
-    }, 200);
+    }, 100);
 };
 
 const runAway = () => {
