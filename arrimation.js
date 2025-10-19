@@ -6,7 +6,7 @@ const jackElem = document.querySelector("#jack");
 const treeElem = document.querySelector("#tree");
 
 const sceneWidth = scene.clientWidth;
-const jackX = sceneWidth / 2 - 130;
+const jackX = sceneWidth / 2 + 50;
 const treeX = sceneWidth / 2 - 200;
 jackElem.style.left = jackX + "px";
 treeElem.style.left = treeX + "px";
@@ -16,7 +16,7 @@ const boyData = {
     cheerImgs: ["./images/boy_cheering/cheering e0000.png", "./images/boy_cheering/cheering e0001.png", "./images/boy_cheering/cheering e0002.png", "./images/boy_cheering/cheering e0003.png", "./images/boy_cheering/cheering e0004.png", "./images/boy_cheering/cheering e0005.png", "./images/boy_cheering/cheering e0006.png", "./images/boy_cheering/cheering e0007.png", "./images/boy_cheering/cheering e0008.png"],
     stoppedImg: "./images/boy_stopped/stopped0006.png",
     elem: boyElem,
-    x: 0,
+    x: sceneWidth - 100,
     poseNumber: 0,
     mode: "walk",
     timerId: null,
@@ -29,7 +29,7 @@ const girlData = {
     runImgs: ["./images/girl_running/running w0000.png", "./images/girl_running/running w0001.png", "./images/girl_running/running w0002.png", "./images/girl_running/running w0003.png", "./images/girl_running/running w0004.png", "./images/girl_running/running w0005.png", "./images/girl_running/running w0006.png", "./images/girl_running/running w0007.png"],
     stoppedImg: "./images/girl_stopped/stopped0006.png",
     elem: girlElem,
-    x: -80,
+    x: sceneWidth - 20,
     poseNumber: 0,
     timerId: null
 };
@@ -38,9 +38,9 @@ const jackImgs = ["./images/jack_popping/jack in a box0000.png", "./images/jack_
 
 const moveBoyAndGirl = () => {
     boyData.timerId = setInterval(() => {
-        const stopX = jackX - 100;
-        if (boyData.x < stopX) {
-            boyData.x += 8;
+        const stopX = jackX + 100;
+        if (boyData.x > stopX) {
+            boyData.x -= 8;
             boyData.elem.style.left = boyData.x + "px";
 
             // Boy Walking
@@ -48,7 +48,7 @@ const moveBoyAndGirl = () => {
             boyData.poseNumber = (boyData.poseNumber + 1) % boyData.walkImgs.length;
 
             // Girl Walking
-            girlData.x = boyData.x - 80;
+            girlData.x = boyData.x + 80;
             girlData.elem.style.left = girlData.x + "px";
             girlData.elem.src = girlData.walkImgs[girlData.poseNumber % girlData.walkImgs.length];
             girlData.poseNumber = (girlData.poseNumber + 1) % girlData.walkImgs.length;
@@ -118,12 +118,12 @@ const startGirlReaction = () => {
 const runAway = () => {
     girlData.poseNumber = 0;
     girlData.timerId = setInterval(() => {
-        girlData.x -= 10;
+        girlData.x += 10;
         girlElem.style.left = girlData.x + "px";
         girlElem.src = girlData.runImgs[girlData.poseNumber];
         girlData.poseNumber = (girlData.poseNumber + 1) % girlData.runImgs.length;
 
-        if (girlData.x < -150) {
+        if (girlData.x > sceneWidth + 150) {
             clearInterval(girlData.timerId);
             girlElem.src = girlData.stoppedImg;
         }
